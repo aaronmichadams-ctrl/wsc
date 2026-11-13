@@ -1,0 +1,478 @@
+/* ---------------- Sketchy buttons ---------------- */
+.sk-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 12px 28px 14px;
+  font-family: var(--font-head);
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--graphite);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+.sk-btn__label {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.08s ease-out;
+}
+.sk-btn .sketch-box__face {
+  transition: transform 0.08s ease-out;
+}
+.sk-btn:hover,
+.sk-btn:focus-visible {
+  animation: wobble 0.42s ease-in-out infinite;
+}
+.sk-btn:active .sketch-box__face,
+.sk-btn:active .sk-btn__label {
+  transform: translate(5px, 6px);
+}
+.sk-btn:active {
+  animation: none;
+}
+.sk-btn:focus-visible {
+  outline-offset: 10px;
+}
+.sk-btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-1.4deg) scale(1.02);
+  }
+  50% {
+    transform: rotate(1.4deg) scale(1.02);
+  }
+}
+
+/* ---------------- Paper scraps + tape ---------------- */
+.scrap {
+  position: relative;
+  transform: rotate(var(--rot, -1deg));
+  filter: drop-shadow(1px 3px 0 rgba(58, 57, 64, 0.12)) drop-shadow(0 8px 10px rgba(58, 57, 64, 0.1));
+  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.scrap:hover {
+  transform: rotate(calc(var(--rot, -1deg) * 0.4)) translateY(-4px);
+}
+.scrap__paper {
+  background-color: var(--scrap);
+  background-image: var(--noise);
+  padding: 34px 26px 28px;
+  height: 100%;
+}
+.scrap__paper--lined {
+  background-image: var(--noise),
+    repeating-linear-gradient(to bottom, transparent 0 31px, rgba(61, 154, 217, 0.22) 31px 33px);
+  background-position: 0 0, 0 18px;
+}
+.tape {
+  position: absolute;
+  width: 110px;
+  height: 30px;
+  background: var(--tape);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  clip-path: polygon(3% 8%, 0 22%, 4% 40%, 1% 60%, 4% 80%, 1% 96%, 97% 92%, 100% 74%, 96% 55%, 99% 38%, 96% 18%, 99% 4%);
+  z-index: 3;
+}
+.tape--top {
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(var(--tr, -3deg));
+}
+.tape--tl {
+  top: -10px;
+  left: -26px;
+  transform: rotate(-38deg);
+  width: 90px;
+}
+.tape--tr {
+  top: -10px;
+  right: -26px;
+  transform: rotate(36deg);
+  width: 90px;
+}
+
+/* ---------------- Sticker ---------------- */
+.sticker {
+  position: absolute;
+  width: 124px;
+  height: 124px;
+  display: grid;
+  place-items: center;
+  transform: rotate(14deg);
+  z-index: 4;
+}
+.sticker svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.sticker__label {
+  position: relative;
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  line-height: 0.95;
+  text-align: center;
+  width: 60px;
+  color: var(--graphite);
+}
+
+/* ---------------- Doodles + scribbles ---------------- */
+.sketchy {
+  display: block;
+  overflow: visible;
+}
+.scribble {
+  position: absolute;
+  left: -2%;
+  width: 104%;
+  height: auto;
+  pointer-events: none;
+}
+.scribble--underline,
+.scribble--double {
+  bottom: -0.32em;
+}
+.scribble--circle {
+  top: -28%;
+  height: 156%;
+  left: -8%;
+  width: 116%;
+}
+.has-scribble {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.doodle {
+  width: 100%;
+  height: auto;
+}
+.margin-doodle {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+.margin-doodle .sun-egg {
+  pointer-events: auto;
+}
+@media (max-width: 1023px) {
+  .margin-doodle {
+    display: none;
+  }
+  .margin-doodle--keep {
+    display: block;
+    transform: scale(0.65);
+  }
+}
+
+.float-1,
+.float-2,
+.float-3 {
+  animation: float 3.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.float-2 {
+  animation-delay: -1s;
+}
+.float-3 {
+  animation-delay: -2s;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(5deg);
+  }
+}
+
+/* sun easter egg */
+.sun-egg {
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.sun-egg .sun-egg__sun {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.sun-egg:hover .sun-egg__sun {
+  transform: rotate(18deg) scale(1.05);
+}
+.sun-egg__glasses {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: drop-in 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes drop-in {
+  from {
+    transform: translateY(-40px) rotate(-12deg);
+    opacity: 0;
+  }
+}
+
+/* ---------------- Trade icons ---------------- */
+.trade-icon {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ---------------- Loader ---------------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background-color: var(--paper);
+  background-image: var(--noise), var(--fibers);
+  will-change: transform;
+}
+.loader__svg {
+  width: min(620px, 90vw);
+  height: auto;
+}
+.loader__text {
+  font-family: var(--font-head);
+  font-size: 76px;
+  fill: var(--graphite);
+}
+
+/* ---------------- Cursor trail ---------------- */
+.crayon-trail {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 40;
+}
+
+/* ---------------- Coaster ---------------- */
+.coaster {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.coaster__svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+.coaster__rail {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+.coaster__rail--1 {
+  stroke-width: 2.2;
+  opacity: 0.7;
+}
+.coaster__ties path {
+  stroke: #b0703a;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+.coaster__trail {
+  fill: none;
+  stroke: var(--yellow);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.32;
+}
+.coaster__station path {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.coaster__station .coaster__flag {
+  fill: var(--red);
+  stroke-width: 2.2;
+  opacity: 0.9;
+}
+.coaster__rider {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: 4;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.coaster__rider .rider {
+  position: absolute;
+  left: -48px;
+  top: -86px;
+  overflow: visible;
+}
+
+/* mobile: the ride becomes a progress bar across the top */
+.coaster--bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  z-index: 30;
+  overflow: visible;
+  background-color: var(--paper);
+  background-image: var(--noise);
+  -webkit-mask: linear-gradient(#000, #000) top / 100% 52px no-repeat,
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 8' preserveAspectRatio='none'><path d='M0 0 H400 V3 L388 6 L371 2 L352 7 L330 3 L311 6 L290 2 L268 7 L250 3 L231 6 L210 2 L188 7 L170 3 L151 6 L130 2 L108 7 L90 3 L71 6 L50 2 L28 7 L10 3 L0 6 Z'/></svg>") bottom / 100% 6px no-repeat;
+  mask: linear-gradient(#000, #000) top / 100% 52px no-repeat,
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 8' preserveAspectRatio='none'><path d='M0 0 H400 V3 L388 6 L371 2 L352 7 L330 3 L311 6 L290 2 L268 7 L250 3 L231 6 L210 2 L188 7 L170 3 L151 6 L130 2 L108 7 L90 3 L71 6 L50 2 L28 7 L10 3 L0 6 Z'/></svg>") bottom / 100% 6px no-repeat;
+}
+.coaster--bar .coaster__ghost {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 1.6;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+  opacity: 0.35;
+}
+.coaster__rail--bar {
+  stroke-width: 3;
+  stroke: var(--red);
+  opacity: 1;
+}
+.coaster__rider--small .rider {
+  transform: scale(0.42);
+  transform-origin: 48px 86px;
+}
+@media (max-width: 1023px) {
+  body {
+    padding-top: 58px;
+  }
+}
+
+/* ---------------- Rider poses ---------------- */
+.rider .arm,
+.rider .face--wide,
+.rider__lines,
+.rider__legs {
+  display: none;
+}
+.rider[data-pose='ride'] .arm--ride,
+.rider[data-pose='up'] .arm--up,
+.rider[data-pose='scream'] .arm--up,
+.rider[data-pose='hat'] .arm--hat,
+.rider[data-pose='wave'] .arm--wave,
+.rider[data-pose='end'] .arm--thumb {
+  display: inline;
+}
+.rider[data-pose='scream'] .face--dot {
+  display: none;
+}
+.rider[data-pose='scream'] .face--wide {
+  display: inline;
+}
+.rider[data-pose='scream'] .rider__lines,
+.rider[data-pose='up'] .rider__lines {
+  display: inline;
+}
+.rider[data-pose='end'] .rider__legs {
+  display: inline;
+}
+.rider[data-pose='wave'] .arm--wave .arm__front {
+  transform-box: view-box;
+  transform-origin: -2px -45px;
+  animation: wave 0.5s ease-in-out infinite alternate;
+}
+.rider[data-pose='hat'] .rider__cap {
+  transform: translate(1px, 1px);
+}
+.rider[data-pose='end'] .rider__bob {
+  animation: proud 2.4s ease-in-out infinite;
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+.rider[data-pose='end'] .arm--thumb .arm__front {
+  transform-box: view-box;
+  transform-origin: -2px -44px;
+  animation: thumb 2.4s ease-in-out infinite;
+}
+@keyframes wave {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(22deg);
+  }
+}
+@keyframes proud {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px) scaleY(1.04);
+  }
+  55% {
+    transform: translateY(0) scaleY(0.97);
+  }
+}
+@keyframes thumb {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(-12deg);
+  }
+  80% {
+    transform: rotate(4deg);
+  }
+}
+
+/* margin doodles live inside .wrap but reach out into the page margin */
+.md-left {
+  left: calc((100% - 100vw) / 2 + max(16px, (100vw - 100%) / 2 - 150px));
+}
+.md-right {
+  right: calc((100% - 100vw) / 2 + max(16px, (100vw - 100%) / 2 - 150px));
+}
+@media (max-width: 1023px) {
+  .md-left.margin-doodle--keep {
+    left: auto;
+    right: -10px;
+    top: -30px !important;
+    transform: scale(0.6);
+    transform-origin: top right;
+  }
+}
